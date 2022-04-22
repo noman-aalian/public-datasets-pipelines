@@ -15,20 +15,20 @@
  */
 
 
-resource "google_bigquery_table" "travel_sustainability_flight_emissions" {
+resource "google_bigquery_table" "travel_impact_model_flights_impact_data" {
   project     = var.project_id
-  dataset_id  = "travel_sustainability"
-  table_id    = "flight_emissions"
-  description = "Flight emissions data"
+  dataset_id  = "travel_impact_model"
+  table_id    = "flights_impact_data"
+  description = "Flights impact data"
   depends_on = [
-    google_bigquery_dataset.travel_sustainability
+    google_bigquery_dataset.travel_impact_model
   ]
 }
 
-output "bigquery_table-travel_sustainability_flight_emissions-table_id" {
-  value = google_bigquery_table.travel_sustainability_flight_emissions.table_id
+output "bigquery_table-travel_impact_model_flights_impact_data-table_id" {
+  value = google_bigquery_table.travel_impact_model_flights_impact_data.table_id
 }
 
-output "bigquery_table-travel_sustainability_flight_emissions-id" {
-  value = google_bigquery_table.travel_sustainability_flight_emissions.id
+output "bigquery_table-travel_impact_model_flights_impact_data-id" {
+  value = google_bigquery_table.travel_impact_model_flights_impact_data.id
 }
