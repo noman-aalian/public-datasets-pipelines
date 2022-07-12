@@ -15,20 +15,14 @@
  */
 
 
-resource "google_bigquery_table" "census_bureau_acs_cbsa_2019_5yr" {
-  project     = var.project_id
-  dataset_id  = "census_bureau_acs"
-  table_id    = "cbsa_2019_5yr"
-  description = "CBSA 2019 5 years report table"
-  depends_on = [
-    google_bigquery_dataset.census_bureau_acs
-  ]
+provider "google" {
+  project                     = var.project_id
+  impersonate_service_account = var.impersonating_acct
+  region                      = var.region
 }
 
-output "bigquery_table-census_bureau_acs_cbsa_2019_5yr-table_id" {
-  value = google_bigquery_table.census_bureau_acs_cbsa_2019_5yr.table_id
-}
+data "google_client_openid_userinfo" "me" {}
 
-output "bigquery_table-census_bureau_acs_cbsa_2019_5yr-id" {
-  value = google_bigquery_table.census_bureau_acs_cbsa_2019_5yr.id
+output "impersonating-account" {
+  value = data.google_client_openid_userinfo.me.email
 }
